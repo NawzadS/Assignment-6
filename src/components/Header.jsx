@@ -1,25 +1,36 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function Header() {
+export default function Header({ onSearch }) {
+  const [query, setQuery] = useState('')
+
+  function handleChange(e) {
+    const val = e.target.value
+    setQuery(val)
+    onSearch(val)
+  }
+
   return (
-    <header className="header">
-      <div className="header-content">
-        <Link to="/" className="app-title">MovieShelf</Link>
-        <nav className="nav-links">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/favorites" className="nav-link">Favorites</Link>
-        </nav>
-        <div className="search-container">
-          <input 
-            type="text" 
-            placeholder="Search movies..."
-            className="search-input"
-          />
-          <button className="search-button">Search</button>
-        </div>
-      </div>
-    </header>
-  );
-};
+    <header
+      style={{
+        display: 'flex',
+        gap: '1rem',
+        alignItems: 'center',
+        padding: '1rem',
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', fontWeight: 'bold' }}>
+        MovieShelf
+      </Link>
 
-export default Header;
+      <input
+        value={query}
+        onChange={handleChange}
+        placeholder="Search movies..."
+        style={{ padding: '0.5rem', flex: 1 }}
+      />
+
+      <Link to="/favorites">Favorites</Link>
+    </header>
+  )
+}
