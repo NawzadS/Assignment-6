@@ -31,6 +31,7 @@ export default function Header({ onSearch }) {
       />
 
       <Link to="/favorites">Favorites</Link>
+      <Link to="/watchlist">Watchlist</Link>
     </header>
   )
 }
